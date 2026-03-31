@@ -1,20 +1,30 @@
 [package]
 name = "blog_os"
 version = "0.1.0"
-edition = "2018"
-
-[dependencies]
+edition = "2024"
 
 # Profile used for cargo build
 [profile.dev]
 panic = "abort"
 
-# Profile used for cargo build --release ]
+# Profile used for cargo build --release
 # DIsabling stack unwinding on panic
 [profile.release]
 panic = "abort"
 
+
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]
+
+[dependencies]
+# This has tobe version 0.9, as anything above will cause errors. This is becasue serde_core depends on modern features that are used in the std_lib to be used.
+bootloader = "0.9"
+volatile = "0.2.6"
+spin = "0.5.2"
+
 [[bin]]
 name = "blog_os"
-test = false
+test = true
 bench = false
